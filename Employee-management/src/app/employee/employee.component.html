@@ -1,0 +1,93 @@
+<p>employee works!</p>
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+  <div class="card-body">
+    <form [formGroup]="employeeForm" (ngSubmit)="save()" novalidate>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="name">Employee Name</label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" id="nameId" required placeholder="name Required"
+            formControlName="name" name="name" [ngClass]="{'is-invalid': (employeeForm.get('name').touched ||
+                 employeeForm.get('name').dirty) &&
+                 !employeeForm.get('name').valid }">
+          <span class="invalid-feedback">
+            <span *ngIf="employeeForm.get('name').errors?.required">
+              Please enter your name.
+            </span>
+          </span>
+        </div>
+
+      </div>
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="qualification"> qualification</label>
+        <div class="col-md-8">
+          <input class="form-control" id="qualificationId" type="text" placeholder="qualification (required)"
+            formControlName="qualification" name="qualification" [ngClass]="{'is-invalid': (employeeForm.get('qualification').touched ||
+                 employeeForm.get('qualification').dirty) &&
+                 !employeeForm.get('qualification').valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="employeeForm.get('qualification').errors?.required">
+              Please enter your qualification.
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="experiance">Experiance</label>
+        <div class="col-md-8">
+          <input class="form-control" id="experianceId" type="text" placeholder="Name (required)" name="experiance"
+            formControlName="experiance" [ngClass]="{'is-invalid': (employeeForm.get('experiance').touched ||
+                 employeeForm.get('experiance').dirty) &&
+                 !employeeForm.get('experiance').valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="employeeForm.get('experiance').errors?.required">
+              Please enter your first name.
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div formArrayName="languages" *ngFor="let langu of languages.controls; let i=index">
+        <div [formGroupName]="i">
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="language">language</label>
+            <div class="col-md-8">
+              <input class="form-control" id="productNameId" type="text" placeholder="language (required)"
+                name="language" formControlName="language" />
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <div class="col-md-4">
+          <button class="btn btn-outline-primary" type="button" title='Add another mailing language'
+            (click)="addLanguages()">
+            Add Another language
+          </button>
+        </div>
+      </div>
+
+
+      <div class="offset-md-2 col-md-4">
+        <button class="btn btn-primary mr-3" style="width:80px;" type="submit">
+          <!-- [title]="productForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                [disabled]="!productForm.valid"> -->
+          Save
+        </button>
+        <button class="btn btn-outline-secondary mr-3" style="width:80px;" type="button" title="Cancel your edits">
+          Cancel
+        </button>
+        <button class="btn btn-outline-warning" style="width:80px" type="button" title="Delete this product">
+          Delete
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
